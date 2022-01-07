@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="titulo">Editar Película</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/js/moviesAddAndEditValidation.js" defer></script>
+</head>
+
+<body>
+    <figure>
+        <img src="/img/logo-DH.png" alt="Logo Digital House">
+      </figure>
+    <h1 class="titulo">Película Editada:  <%= Movie.title %></h1>
+    <section class="formulario">
+        
+            <form action="/movies/update/<%= Movie.id %>?_method=PUT" method="POST">
+                <label for="title">Título </label>
+                <p><input type="text" name="title" id="title" value="<%= Movie.title %>" ></p>
+                <label for="rating">Calificación </label>
+                <p><input type="text" name="rating" id="rating" value="<%= Movie.rating %>" ></p>
+                <label for="awards">Premios </label>
+                <p><input type="text" name="awards" id="awards" value="<%= Movie.awards %>" ></p>
+                <label for="release_date">Fecha de creación </label>
+                <p><input type="date" name="release_date" id="release_date" value="<%= Movie.release_date %>"></p>
+                <label for="length">Duración </label>
+                <p><input type="text" name="length" id="length" value="<%= Movie.length %>" ></p>
+                <label for="genre_id">Género </label>
+                <p>
+                    <select name="genre_id" id="genre" >
+                        <% allGenres.forEach(genre => { %>
+                        <option value="<%= genre.id %>" <% if (Movie.genre.id == genre.id) { %><%= 'selected' %><% }; %>><%= genre.name %></option>
+                        <% }); %>
+                    </select>
+                </p>
+
+        <!--
+                <label for="genre_id">Genre ID </label>
+                <p><input type="number" name="genre_id" id="" value="<%= Movie.genre_id %>"></p>
+            -->
+                
+                <br>
+                <ul class="errores">
+                    <li>
+                        <p><span class="errTitle err"></span></p>
+                    </li>
+                    <li>
+                        <p><span class="errRating err"></span></p>
+                    </li>
+                    <li>
+                        <p><span class="errAwards err"></span></p>
+                    </li>
+                    <li>
+                        <p><span class="errReleaseDate err"></span></p>
+                    </li>
+                    <li>
+                        <p><span class="errLength err"></span></p>
+                    </li>
+                    <li>
+                        <p><span class="errGenre err"></span></p>
+                    </li>     
+                </ul>
+                <br>
+                <p> <button class="botonAgregar" type="submit">Actualizar</button>
+            
+                <a  class="botonVolver" href="/movies">Listado de Películas</a></p>
+            </form>
+        
+    </section>
+    <script src="/js/movies"></script>
+</body>
+
+</html>
